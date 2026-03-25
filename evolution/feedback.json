@@ -1,0 +1,32 @@
+{
+  "entries": [
+    {
+      "id": "ALL",
+      "feedback_type": "output_location",
+      "comment": "测试用例输出到当前工作目录",
+      "timestamp": "2026-03-24T16:11:41.717721",
+      "resolved": false
+    },
+    {
+      "id": "ALL",
+      "feedback_type": "formatting",
+      "comment": "前置条件/测试步骤/预期结果等内容都在一个单元格内并使用真实换行符 (\\n)分隔步骤",
+      "timestamp": "2026-03-24T16:18:09.161868",
+      "resolved": false
+    },
+    {
+      "id": "ALL",
+      "feedback_type": "formatting",
+      "comment": "前置条件/测试步骤/预期结果等内容若存在多行使用1.2.3.格式",
+      "timestamp": "2026-03-24T16:18:09.161868",
+      "resolved": false
+    },
+    {
+      "id": "ALL",
+      "feedback_type": "encoding",
+      "comment": "CSV中文显示乱码，使用UTF-8 with BOM编码",
+      "timestamp": "2026-03-24T16:27:19.462853",
+      "resolved": false
+    }
+  ]
+}
