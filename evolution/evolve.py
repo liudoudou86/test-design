@@ -45,26 +45,9 @@ def get_status():
 
 
 def get_rules():
-    """从feedback中提取规则（基于ALL类型的entry）"""
+    """返回所有 ALL 类型的反馈条目作为规则，由 AI 自行推断"""
     data = load_data()
-    keywords_map = {
-        "encoding": "强制使用 UTF-8 with BOM 生成CSV",
-        "formatting": "测试步骤使用真实换行符\\n而非<br>标签",
-        "missing": "补充遗漏测试点",
-        "redundant": "过滤相似模式",
-        "格式改进": "前置条件/测试步骤/预期结果使用换行符分隔",
-    }
-    rules = []
-    for entry in data.get("entries", []):
-        if entry.get("id") == "ALL":
-            rules.append(
-                {
-                    "type": entry.get("feedback_type"),
-                    "action": keywords_map.get(
-                        entry.get("feedback_type"), entry.get("comment")
-                    ),
-                }
-            )
+    rules = [e for e in data.get("entries", []) if e.get("id") == "ALL"]
     return rules
 
 

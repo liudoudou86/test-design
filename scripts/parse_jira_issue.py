@@ -2,6 +2,9 @@
 
 import argparse
 import json
+import os
+import sys
+from pathlib import Path
 from typing import Optional
 
 from jira import JIRA
@@ -132,9 +135,23 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    JIRA_URL = "https://jira.tasly.com/jira"
-    JIRA_USERNAME = ""
-    JIRA_PASSWORD = ""
+    # 自动加载脚本所在目录的 .env 文件
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if env_path.exists():
+        with open(env_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, _, val = line.partition("=")
+                    os.environ.setdefault(key.strip(), val.strip())
+
+    JIRA_URL = os.environ.get("JIRA_URL")
+    JIRA_USERNAME = os.environ.get("JIRA_USERNAME")
+    JIRA_PASSWORD = os.environ.get("JIRA_PASSWORD")
+
+    if not all([JIRA_URL, JIRA_USERNAME, JIRA_PASSWORD]):
+        print("错误：请设置 JIRA_URL, JIRA_USERNAME, JIRA_PASSWORD 环境变量")
+        sys.exit(1)
 
     main(
         url=JIRA_URL,
